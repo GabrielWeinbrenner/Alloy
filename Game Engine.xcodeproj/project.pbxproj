@@ -16,6 +16,12 @@
 		00826A282C3AB6C30042AD76 /* Game_EngineUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A272C3AB6C30042AD76 /* Game_EngineUITestsLaunchTests.swift */; };
 		00826A3A2C3AC3C50042AD76 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A392C3AC3C50042AD76 /* GameView.swift */; };
 		00826A3E2C3AC4400042AD76 /* MyShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 00826A3D2C3AC4400042AD76 /* MyShaders.metal */; };
+		00826A442C3C414F0042AD76 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A432C3C414C0042AD76 /* Engine.swift */; };
+		00826A462C3C42030042AD76 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A452C3C42000042AD76 /* Preferences.swift */; };
+		00826A492C3C4F220042AD76 /* ShaderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A482C3C4F220042AD76 /* ShaderLibrary.swift */; };
+		00826A4B2C3C52B00042AD76 /* VertexLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A4A2C3C52AE0042AD76 /* VertexLibrary.swift */; };
+		00826A4D2C3C699B0042AD76 /* RenderLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A4C2C3C69990042AD76 /* RenderLibrary.swift */; };
+		00826A4F2C3C6B470042AD76 /* RenderPipelineLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A4E2C3C6B430042AD76 /* RenderPipelineLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		00826A272C3AB6C30042AD76 /* Game_EngineUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game_EngineUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		00826A392C3AC3C50042AD76 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		00826A3D2C3AC4400042AD76 /* MyShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MyShaders.metal; sourceTree = "<group>"; };
+		00826A432C3C414C0042AD76 /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		00826A452C3C42000042AD76 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		00826A482C3C4F220042AD76 /* ShaderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderLibrary.swift; sourceTree = "<group>"; };
+		00826A4A2C3C52AE0042AD76 /* VertexLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexLibrary.swift; sourceTree = "<group>"; };
+		00826A4C2C3C69990042AD76 /* RenderLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderLibrary.swift; sourceTree = "<group>"; };
+		00826A4E2C3C6B430042AD76 /* RenderPipelineLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderPipelineLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,14 +137,60 @@
 		00826A352C3AB9BC0042AD76 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				00826A3D2C3AC4400042AD76 /* MyShaders.metal */,
-				00826A392C3AC3C50042AD76 /* GameView.swift */,
-				00826A122C3AB6C20042AD76 /* Game_Engine.entitlements */,
-				00826A0A2C3AB6C10042AD76 /* Game_Engine.xcdatamodeld */,
-				00826A062C3AB6C10042AD76 /* AppDelegate.swift */,
+				00826A472C3C4BA30042AD76 /* Libraries */,
+				00826A422C3C41460042AD76 /* Core */,
+				00826A402C3C409B0042AD76 /* Display */,
+				00826A3F2C3C40920042AD76 /* Shaders */,
+				00826A412C3C40AC0042AD76 /* Other */,
 				00826A0D2C3AB6C20042AD76 /* Assets.xcassets */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		00826A3F2C3C40920042AD76 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				00826A3D2C3AC4400042AD76 /* MyShaders.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		00826A402C3C409B0042AD76 /* Display */ = {
+			isa = PBXGroup;
+			children = (
+				00826A392C3AC3C50042AD76 /* GameView.swift */,
+			);
+			path = Display;
+			sourceTree = "<group>";
+		};
+		00826A412C3C40AC0042AD76 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				00826A122C3AB6C20042AD76 /* Game_Engine.entitlements */,
+				00826A0A2C3AB6C10042AD76 /* Game_Engine.xcdatamodeld */,
+				00826A062C3AB6C10042AD76 /* AppDelegate.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		00826A422C3C41460042AD76 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				00826A452C3C42000042AD76 /* Preferences.swift */,
+				00826A432C3C414C0042AD76 /* Engine.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		00826A472C3C4BA30042AD76 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				00826A4E2C3C6B430042AD76 /* RenderPipelineLibrary.swift */,
+				00826A4C2C3C69990042AD76 /* RenderLibrary.swift */,
+				00826A4A2C3C52AE0042AD76 /* VertexLibrary.swift */,
+				00826A482C3C4F220042AD76 /* ShaderLibrary.swift */,
+			);
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,9 +324,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				00826A3E2C3AC4400042AD76 /* MyShaders.metal in Sources */,
+				00826A4B2C3C52B00042AD76 /* VertexLibrary.swift in Sources */,
+				00826A4D2C3C699B0042AD76 /* RenderLibrary.swift in Sources */,
 				00826A072C3AB6C10042AD76 /* AppDelegate.swift in Sources */,
+				00826A462C3C42030042AD76 /* Preferences.swift in Sources */,
+				00826A4F2C3C6B470042AD76 /* RenderPipelineLibrary.swift in Sources */,
 				00826A3A2C3AC3C50042AD76 /* GameView.swift in Sources */,
+				00826A492C3C4F220042AD76 /* ShaderLibrary.swift in Sources */,
 				00826A0C2C3AB6C10042AD76 /* Game_Engine.xcdatamodeld in Sources */,
+				00826A442C3C414F0042AD76 /* Engine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Game Engine/src/Game_Engine.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Game Engine/src/Other/Game_Engine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -466,7 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Game Engine/src/Game_Engine.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Game Engine/src/Other/Game_Engine.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
