@@ -8,8 +8,7 @@
 import MetalKit
 
 class Renderer: NSObject {
-    var gameObject: GameObject = GameObject()
-    
+    var gameObjects: [Node] = [GameObject(meshType: .Quad)]
 }
 
 extension Renderer: MTKViewDelegate {
@@ -24,8 +23,10 @@ extension Renderer: MTKViewDelegate {
         let commandBuffer = Engine.commandQueue.makeCommandBuffer();
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         
-        gameObject.render(renderCommandEncoder!)
-        
+        for i in gameObjects {
+            i.render(renderCommandEncoder: renderCommandEncoder!)
+        }
+
         renderCommandEncoder?.endEncoding()
         commandBuffer?.present(drawable)
         commandBuffer?.commit()
