@@ -19,15 +19,9 @@ class VertexLibrary {
         var color: SIMD4<Float>
     }
     var vertexDescriptor: MTLVertexDescriptor;
-    var vertices: [Vertex]
 
     init() {
         vertexDescriptor = vertexDescriptors[.Basic]!.vertexDescriptor
-        self.vertices = [
-            Vertex(position: SIMD3<Float>(0,1,0), color: SIMD4(1,0,0,1)),
-            Vertex(position: SIMD3<Float>(-1,-1,0), color: SIMD4(0,1,0,1)),
-            Vertex(position: SIMD3<Float>(1,-1,0), color: SIMD4(0,0,1,1)),
-        ]
     }
     
     public func getVertexDescriptor(_ type: VertexDescriptorTypes) -> MTLVertexDescriptor {
