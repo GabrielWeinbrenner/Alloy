@@ -8,5 +8,5 @@
 import MetalKit
 
 protocol Renderable {
-    func commitRender(_ renderCommandEncoder: MTLRenderCommandEncoder)
+    func commitRender(_ renderCommandEncoder: MTLRenderCommandEncoder) throws
 }

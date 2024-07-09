@@ -38,9 +38,9 @@ float2 wave(float2 uv, float x, float y){
 }
 
 fragment float4 basic_fragment_shader(RasterizerData rd [[stage_in]]) {
-    float3 pos = rd.position.xyz;
-    float xPos = pos.x/1000;
-    float yPos = pos.y/1000;
+//    float3 pos = rd.position.xyz;
+//    float xPos = pos.x;
+//    float yPos = pos.y;
 //    CHECKERBOARD
 //    float strength = step(0.8, fmod(xPos * 10.0, 1.0));
 //    strength = step(0.8, strength);
@@ -49,7 +49,7 @@ fragment float4 basic_fragment_shader(RasterizerData rd [[stage_in]]) {
 //    SIN WAVE
 //    float2 wavedUv = wave(float2(xPos, yPos), 30.0, 30.0);
 //    float strength = 1.0 - step(0.01, abs(distance(wavedUv, float2(0.5,0.5)) - 0.25));
-    float strength = xPos;
+//    float strength = xPos;
 //    return float4(strength, strength, strength, 1.0);
     return rd.color;
 }

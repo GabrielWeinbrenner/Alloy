@@ -16,23 +16,23 @@ enum FragmentShaderTypes {
 }
 
 class ShaderLibrary {
-    public static var defaultLibrary: MTLLibrary = Engine.device.makeDefaultLibrary()!
     
     var vertexShaders: [VertexShaderTypes: Shader] = [:]
     var fragmentShaders: [FragmentShaderTypes: Shader] = [:]
-    init() {
-        createDefaultShaders()
+    
+    public func ignite(defaultLibrary: MTLLibrary) {
+        vertexShaders = [
+            .Basic: Basic_VertexShader(defaultLibrary)
+        ]
+        fragmentShaders = [
+            .Basic: Basic_FragmentShader(defaultLibrary)
+        ]
     }
     
-    public func createDefaultShaders() {
-        vertexShaders[.Basic] = Basic_VertexShader()
-        fragmentShaders[.Basic] = Basic_FragmentShader()
-    }
-    
-    public func vertex(_ vertexShaderType: VertexShaderTypes) -> MTLFunction {
+    public func vertex(_ vertexShaderType: VertexShaderTypes) -> MTLFunction? {
         return vertexShaders[vertexShaderType]!.function
     }
-    public func fragment(_ fragmentShaderType: FragmentShaderTypes) -> MTLFunction {
+    public func fragment(_ fragmentShaderType: FragmentShaderTypes) -> MTLFunction? {
         return fragmentShaders[fragmentShaderType]!.function
     }
 
@@ -41,26 +41,28 @@ class ShaderLibrary {
 protocol Shader {
     var name: String { get }
     var functionName: String { get }
-    var function: MTLFunction { get }
+    var function: MTLFunction? { get }
 }
 
 public struct Basic_VertexShader: Shader {
     public var name: String = "Basic Vertex Shader"
     public var functionName: String = "basic_vertex_shader"
-    public var function: MTLFunction {
-        let function = ShaderLibrary.defaultLibrary.makeFunction(name: functionName)
+    public var function: MTLFunction?
+    init(_ defaultLibrary: MTLLibrary) {
+        let function = defaultLibrary.makeFunction(name: functionName)
         function?.label = name
-        return function!
+        self.function = function
     }
     
 }
 public struct Basic_FragmentShader: Shader {
     public var name: String = "Basic Fragment Shader"
     public var functionName: String = "basic_fragment_shader"
-    public var function: MTLFunction {
-        let function = ShaderLibrary.defaultLibrary.makeFunction(name: functionName)
+    public var function: MTLFunction?
+    init(_ defaultLibrary: MTLLibrary) {
+        let function = defaultLibrary.makeFunction(name: functionName)
         function?.label = name
-        return function!
+        self.function = function
     }
     
 }

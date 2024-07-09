@@ -25,12 +25,12 @@ class Node {
         self.children.append(child)
     }
     
-    func render(renderCommandEncoder: MTLRenderCommandEncoder) {
+    func render(renderCommandEncoder: MTLRenderCommandEncoder) throws {
         for child in children {
-            child.render(renderCommandEncoder: renderCommandEncoder)
+            try child.render(renderCommandEncoder: renderCommandEncoder)
         }
         if let renderable = self as? Renderable {
-            renderable.commitRender(renderCommandEncoder)
+            try renderable.commitRender(renderCommandEncoder)
         }
     }
     

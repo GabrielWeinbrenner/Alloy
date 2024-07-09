@@ -11,20 +11,21 @@ enum VertexDescriptorTypes {
 }
 class VertexLibrary {
     
-    var vertexDescriptors: [VertexDescriptorTypes: VertexDescriptor] = [
-        .Basic: Basic_VertexDescriptor()
-    ]
+    var vertexDescriptors: [VertexDescriptorTypes: VertexDescriptor] = [:]
     struct Vertex {
         var position: SIMD3<Float>
         var color: SIMD4<Float>
     }
-    var vertexDescriptor: MTLVertexDescriptor;
-
-    init() {
-        vertexDescriptor = vertexDescriptors[.Basic]!.vertexDescriptor
-    }
+    var vertexDescriptor: MTLVertexDescriptor?;
     
-    public func getVertexDescriptor(_ type: VertexDescriptorTypes) -> MTLVertexDescriptor {
+    public func ignite() {
+        vertexDescriptors = [
+            .Basic: Basic_VertexDescriptor()
+        ]
+        vertexDescriptor = vertexDescriptors[.Basic]!.vertexDescriptor
+        
+    }
+    public func getVertexDescriptor(_ type: VertexDescriptorTypes) -> MTLVertexDescriptor? {
         vertexDescriptor = vertexDescriptors[type]!.vertexDescriptor
         return vertexDescriptor
     }
@@ -39,7 +40,9 @@ protocol VertexDescriptor {
 public struct Basic_VertexDescriptor: VertexDescriptor {
     var name: String = "Basic Vertex Descriptor"
     
-    var vertexDescriptor: MTLVertexDescriptor {
+    var vertexDescriptor: MTLVertexDescriptor 
+    
+    init() {
         let vertexDescriptor = MTLVertexDescriptor()
         vertexDescriptor.attributes[0].format = .float3;
         vertexDescriptor.attributes[0].bufferIndex = 0;
@@ -51,7 +54,6 @@ public struct Basic_VertexDescriptor: VertexDescriptor {
         
         vertexDescriptor.layouts[0].stride = MemoryLayout<VertexLibrary.Vertex>.stride;
         
-        return vertexDescriptor
-
+        self.vertexDescriptor = vertexDescriptor
     }
 }

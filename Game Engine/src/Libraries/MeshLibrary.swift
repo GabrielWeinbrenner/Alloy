@@ -13,43 +13,41 @@ enum MeshTypes {
 }
 
 class MeshLibrary {
+    var customMeshes: [MeshTypes: Mesh] = [:]
     
-    var customMeshes: [MeshTypes: Mesh] = [
-        .Triangle: Triangle_CustomMesh(),
-        .Quad: Quad_CustomMesh()
-    ]
-    
-    var currentMesh: Mesh
-    
-    init() {
-        currentMesh = customMeshes[.Triangle]!
+    public func ignite(device: MTLDevice) {
+        customMeshes = [
+            .Triangle: Triangle_CustomMesh(device),
+            .Quad: Quad_CustomMesh(device)
+        ]
     }
     
     public func getMesh(_ type: MeshTypes) -> Mesh {
-        currentMesh = customMeshes[type]!
-        return currentMesh
+        return customMeshes[type]!
     }
 }
 
 protocol Mesh {
-    var vertexBuffer: MTLBuffer! { get }
-    var vertexCount: Int! { get }
+    var vertexBuffer: MTLBuffer? { get }
+    var vertexCount: Int { get }
     
 }
 
 class CustomMesh: Mesh {
     typealias Vertex = VertexLibrary.Vertex
-    var vertices: [Vertex]!
-    var vertexBuffer: MTLBuffer!
-    var vertexCount: Int! {
+    var vertices: [Vertex] = []
+    var vertexBuffer: MTLBuffer? = nil
+    var vertexCount: Int {
         return vertices.count
     }
-    init() {
+    var device: MTLDevice
+    init(_ device: MTLDevice) {
+        self.device = device
         createVertices()
         createBuffers()
     }
     func createBuffers() {
-        vertexBuffer = Engine.device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<VertexLibrary.Vertex>.stride, options: [])
+        vertexBuffer = device.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<VertexLibrary.Vertex>.stride, options: [])
     }
     
     func createVertices() { }

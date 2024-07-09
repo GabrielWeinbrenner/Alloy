@@ -11,16 +11,18 @@ enum RenderDescriptorTypes {
 }
 class RenderLibrary {
     
-    var renderDescriptors: [RenderDescriptorTypes: RenderDescriptor] = [
-        .Basic: Basic_RenderDescriptor()
-    ]
-    private var renderDescriptor: MTLRenderPipelineDescriptor;
+    var renderDescriptors: [RenderDescriptorTypes: RenderDescriptor] = [:]
+    private var renderDescriptor: MTLRenderPipelineDescriptor?;
 
-    init() {
+    public func ignite(shaderLibrary: ShaderLibrary, vertexLibrary: VertexLibrary) {
+        renderDescriptors = [
+            .Basic: Basic_RenderDescriptor(shaderLibrary, vertexLibrary)
+        ]
         renderDescriptor = renderDescriptors[.Basic]!.renderDescriptor
+
     }
     
-    public func getRenderDescriptor(_ type: RenderDescriptorTypes) -> MTLRenderPipelineDescriptor {
+    public func getRenderDescriptor(_ type: RenderDescriptorTypes) -> MTLRenderPipelineDescriptor? {
         renderDescriptor = renderDescriptors[type]!.renderDescriptor
         return renderDescriptor
     }
@@ -35,13 +37,15 @@ protocol RenderDescriptor {
 public struct Basic_RenderDescriptor: RenderDescriptor {
     var name: String = "Basic Render Descriptor"
     
-    var renderDescriptor: MTLRenderPipelineDescriptor {
+    var renderDescriptor: MTLRenderPipelineDescriptor
+    
+    init(_ shaderLibrary: ShaderLibrary, _ vertexLibrary: VertexLibrary) {
         let renderPipelineDescriptor = MTLRenderPipelineDescriptor();
         
         renderPipelineDescriptor.colorAttachments[0].pixelFormat = Preferences.mainPixelFormat;
-        renderPipelineDescriptor.vertexFunction = Engine.shaderLibrary.vertex(.Basic)
-        renderPipelineDescriptor.fragmentFunction = Engine.shaderLibrary.fragment(.Basic)
-        renderPipelineDescriptor.vertexDescriptor = Engine.vertexLibrary.getVertexDescriptor(.Basic);
-        return renderPipelineDescriptor;
+        renderPipelineDescriptor.vertexFunction = shaderLibrary.vertex(.Basic)
+        renderPipelineDescriptor.fragmentFunction = shaderLibrary.fragment(.Basic)
+        renderPipelineDescriptor.vertexDescriptor = vertexLibrary.getVertexDescriptor(.Basic);
+        self.renderDescriptor = renderPipelineDescriptor;
     }
 }

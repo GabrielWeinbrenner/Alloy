@@ -18,9 +18,14 @@ extension Renderer: MTKViewDelegate {
         // Pass in the view that we're delegating from 
         guard let drawable = view.currentDrawable, let renderPassDescriptor = view.currentRenderPassDescriptor else { return; }
         
-        let commandBuffer = Engine.commandQueue.makeCommandBuffer();
+        let commandBuffer = Engine.shared.commandQueue?.makeCommandBuffer();
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        Engine.sceneManager.tickScene(renderCommandEncoder: renderCommandEncoder!, deltaTime: 1 / Float(view.preferredFramesPerSecond))
+        do {
+            try Engine.shared.sceneManager.tickScene(renderCommandEncoder: renderCommandEncoder!, deltaTime: 1 / Float(view.preferredFramesPerSecond))
+        } catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
 
         renderCommandEncoder?.endEncoding()
         commandBuffer?.present(drawable)

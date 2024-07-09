@@ -10,19 +10,23 @@ enum SceneTypes {
 }
 class SceneManager {
     
-    var scene: [SceneTypes: Scene] = [
-        .Sandbox: Sandbox(),
-    ]
+    var scene: [SceneTypes: Scene] = [:]
 
-    var currentScene: Scene;
+    var currentScene: Scene?;
 
-    init() {
+    public func ignite() {
+        scene = [
+            .Sandbox: Sandbox()
+        ]
         currentScene = scene[.Sandbox]!
     }
     
-    func tickScene(renderCommandEncoder: MTLRenderCommandEncoder, deltaTime: Float) {
+    func tickScene(renderCommandEncoder: MTLRenderCommandEncoder, deltaTime: Float) throws {
+        guard let currentScene = currentScene else {
+            return
+        }
         currentScene.update(deltaTime: deltaTime)
-        currentScene.render(renderCommandEncoder: renderCommandEncoder)
+        try currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
     
     

@@ -9,19 +9,20 @@ import MetalKit
 struct ModelConstants {
     var modelMatrix: matrix_float4x4!
 }
+enum GameObjectErrors: Error {
+    case descriptorNotFound
+}
 class GameObject: Node {
     var mesh: Mesh
     var modelConstants = ModelConstants()
     
     init(meshType: MeshTypes) {
-        mesh = Engine.meshLibrary.getMesh(meshType)
+        mesh = Engine.shared.meshLibrary.getMesh(meshType)
     }
     
     var time: Float = 0
-    func updateVal() {}
     override func update(deltaTime: Float) {
         time += deltaTime
-        updateVal()
         updateModelConstants(deltaTime: deltaTime)
     }
     func updateModelConstants(deltaTime: Float) {
@@ -30,10 +31,13 @@ class GameObject: Node {
 }
 
 extension GameObject: Renderable {
-    func commitRender(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+    func commitRender(_ renderCommandEncoder: MTLRenderCommandEncoder) throws {
+        guard let renderPipelineState = Engine.shared.renderPipelineLibrary.getRenderPipelineDescriptor(.Basic) else {
+            throw (GameObjectErrors.descriptorNotFound)
+        }
 //        renderCommandEncoder.setTriangleFillMode(.lines)
         renderCommandEncoder.setVertexBytes(&modelConstants, length: MemoryLayout<ModelConstants>.stride, index: 1)
-        renderCommandEncoder.setRenderPipelineState(Engine.renderPipelineLibrary.getRenderPipelineDescriptor(.Basic))
+        renderCommandEncoder.setRenderPipelineState(renderPipelineState)
         renderCommandEncoder.setVertexBuffer(mesh.vertexBuffer, offset: 0, index: 0)
         renderCommandEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: mesh.vertexCount)
         

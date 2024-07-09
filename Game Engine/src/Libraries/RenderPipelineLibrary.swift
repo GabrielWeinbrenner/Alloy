@@ -9,18 +9,23 @@ import MetalKit
 enum RenderPipelineStateTypes {
     case Basic
 }
+enum RenderPipelineError: Error {
+    case descriptorNotFound
+    case pipelineCreationFailed
+}
 class RenderPipelineLibrary {
     
-    var renderPipelineStates: [RenderPipelineStateTypes: RenderPipelineState] = [
-        .Basic: Basic_RenderPipeline()
-    ]
-    var renderPipelineState: MTLRenderPipelineState;
-
-    init() {
+    var renderPipelineStates: [RenderPipelineStateTypes: RenderPipelineState] = [:]
+    var renderPipelineState: MTLRenderPipelineState?;
+    
+    public func ignite(device: MTLDevice, renderLibrary: RenderLibrary) throws {
+        renderPipelineStates = [
+            .Basic: try Basic_RenderPipeline(device, renderLibrary)
+        ]
         renderPipelineState = renderPipelineStates[.Basic]!.renderPipelineState
     }
     
-    public func getRenderPipelineDescriptor(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState {
+    public func getRenderPipelineDescriptor(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState? {
         renderPipelineState = renderPipelineStates[type]!.renderPipelineState
         return renderPipelineState
     }
@@ -35,14 +40,16 @@ protocol RenderPipelineState {
 public struct Basic_RenderPipeline: RenderPipelineState {
     var name: String = "Basic Vertex Descriptor"
     
-    var renderPipelineState: MTLRenderPipelineState {
-        var renderPipelineState: MTLRenderPipelineState!
-        do {
-            renderPipelineState = try Engine.device.makeRenderPipelineState(descriptor: Engine.renderLibrary.getRenderDescriptor(.Basic))
-            return renderPipelineState
-        } catch let error as NSError {
-            print(error)
+    var renderPipelineState: MTLRenderPipelineState
+    
+    init(_ device: MTLDevice, _ renderLibrary: RenderLibrary) throws {
+        guard let renderDescriptor = renderLibrary.getRenderDescriptor(.Basic) else {
+            throw(RenderPipelineError.descriptorNotFound)
         }
-        return renderPipelineState
+        do {
+            self.renderPipelineState = try device.makeRenderPipelineState(descriptor: renderDescriptor)
+        } catch let error as NSError {
+            throw error
+        }
     }
 }
