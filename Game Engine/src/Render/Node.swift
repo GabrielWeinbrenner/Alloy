@@ -10,7 +10,7 @@ class Node {
     var position: SIMD3<Float> = SIMD3<Float>(repeating: 0)
     var scalar: SIMD3<Float> = SIMD3<Float>(repeating: 1)
     var rotation: SIMD3<Float> = SIMD3<Float>(repeating: 0)
-
+    var children: [Node] = []
     var modelMatrix: matrix_float4x4 {
         var modelMatrix = matrix_identity_float4x4
         modelMatrix.scale(by: scalar)
@@ -21,9 +21,22 @@ class Node {
         return modelMatrix
     }
     
+    func addChild(_ child: Node) {
+        self.children.append(child)
+    }
+    
     func render(renderCommandEncoder: MTLRenderCommandEncoder) {
+        for child in children {
+            child.render(renderCommandEncoder: renderCommandEncoder)
+        }
         if let renderable = self as? Renderable {
             renderable.commitRender(renderCommandEncoder)
+        }
+    }
+    
+    func update(deltaTime: Float) {
+        for child in children {
+            child.update(deltaTime: deltaTime)
         }
     }
 }

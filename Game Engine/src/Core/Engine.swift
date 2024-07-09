@@ -14,6 +14,7 @@ class Engine {
     public static var renderLibrary: RenderLibrary = RenderLibrary()
     public static var renderPipelineLibrary: RenderPipelineLibrary = RenderPipelineLibrary()
     public static var meshLibrary: MeshLibrary = MeshLibrary()
+    public static var sceneManager: SceneManager = SceneManager()
 
 
     public static func Ignite(device: MTLDevice) {

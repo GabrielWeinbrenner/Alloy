@@ -7,14 +7,7 @@
 
 import MetalKit
 
-class Renderer: NSObject {
-    var player = Player()
-    var gameObjects: [Node] = []
-    override init() {
-        super.init()
-        gameObjects.append(player)
-    }
-}
+class Renderer: NSObject { }
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
@@ -27,10 +20,7 @@ extension Renderer: MTKViewDelegate {
         
         let commandBuffer = Engine.commandQueue.makeCommandBuffer();
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        player.update(deltaTime: 1 / Float(view.preferredFramesPerSecond))
-        for i in gameObjects {
-            i.render(renderCommandEncoder: renderCommandEncoder!)
-        }
+        Engine.sceneManager.tickScene(renderCommandEncoder: renderCommandEncoder!, deltaTime: 1 / Float(view.preferredFramesPerSecond))
 
         renderCommandEncoder?.endEncoding()
         commandBuffer?.present(drawable)

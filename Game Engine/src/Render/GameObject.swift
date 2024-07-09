@@ -18,15 +18,13 @@ class GameObject: Node {
     }
     
     var time: Float = 0
-    func update(deltaTime: Float) {
+    func updateVal() {}
+    override func update(deltaTime: Float) {
         time += deltaTime
-//        self.position = SIMD3<Float>(cos(time*2), 0, 0)
-//        self.scalar = SIMD3<Float>(1, abs(cos(time*4) + 0.2), 1)
-        self.rotation.z = cos(time*20)
+        updateVal()
         updateModelConstants(deltaTime: deltaTime)
     }
-    
-    private func updateModelConstants(deltaTime: Float) {
+    func updateModelConstants(deltaTime: Float) {
         modelConstants.modelMatrix = self.modelMatrix
     }
 }

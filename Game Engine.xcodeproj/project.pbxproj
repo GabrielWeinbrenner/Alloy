@@ -29,6 +29,9 @@
 		00FE7E312C3CAAC500A058FD /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E302C3CAAC300A058FD /* Renderable.swift */; };
 		00FE7E332C3CD0E300A058FD /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E322C3CD0E100A058FD /* Player.swift */; };
 		00FE7E362C3D5DF000A058FD /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E352C3D5DED00A058FD /* Math.swift */; };
+		00FE7E392C3D66A900A058FD /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E382C3D66A800A058FD /* Scene.swift */; };
+		00FE7E3B2C3D67D000A058FD /* Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E3A2C3D67CD00A058FD /* Sandbox.swift */; };
+		00FE7E3D2C3D6A9300A058FD /* SceneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E3C2C3D6A8F00A058FD /* SceneManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,9 @@
 		00FE7E302C3CAAC300A058FD /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		00FE7E322C3CD0E100A058FD /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		00FE7E352C3D5DED00A058FD /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		00FE7E382C3D66A800A058FD /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		00FE7E3A2C3D67CD00A058FD /* Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sandbox.swift; sourceTree = "<group>"; };
+		00FE7E3C2C3D6A8F00A058FD /* SceneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +213,7 @@
 				00826A4C2C3C69990042AD76 /* RenderLibrary.swift */,
 				00826A4A2C3C52AE0042AD76 /* VertexLibrary.swift */,
 				00826A482C3C4F220042AD76 /* ShaderLibrary.swift */,
+				00FE7E3C2C3D6A8F00A058FD /* SceneManager.swift */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -214,8 +221,9 @@
 		00826A502C3C6DC20042AD76 /* Render */ = {
 			isa = PBXGroup;
 			children = (
-				00FE7E322C3CD0E100A058FD /* Player.swift */,
 				00FE7E2F2C3CAABB00A058FD /* Protocols */,
+				00FE7E372C3D669B00A058FD /* Scenes */,
+				00FE7E322C3CD0E100A058FD /* Player.swift */,
 				00FE7E2D2C3CA9FB00A058FD /* Node.swift */,
 				00826A512C3C6E5B0042AD76 /* GameObject.swift */,
 			);
@@ -236,6 +244,15 @@
 				00FE7E352C3D5DED00A058FD /* Math.swift */,
 			);
 			path = Math;
+			sourceTree = "<group>";
+		};
+		00FE7E372C3D669B00A058FD /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				00FE7E3A2C3D67CD00A058FD /* Sandbox.swift */,
+				00FE7E382C3D66A800A058FD /* Scene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,12 +387,14 @@
 			files = (
 				00826A522C3C6E650042AD76 /* GameObject.swift in Sources */,
 				00826A3E2C3AC4400042AD76 /* MyShaders.metal in Sources */,
+				00FE7E3D2C3D6A9300A058FD /* SceneManager.swift in Sources */,
 				00826A4B2C3C52B00042AD76 /* VertexLibrary.swift in Sources */,
 				00FE7E312C3CAAC500A058FD /* Renderable.swift in Sources */,
 				00FE7E332C3CD0E300A058FD /* Player.swift in Sources */,
 				00826A4D2C3C699B0042AD76 /* RenderLibrary.swift in Sources */,
 				00826A542C3C700B0042AD76 /* Renderer.swift in Sources */,
 				00826A072C3AB6C10042AD76 /* AppDelegate.swift in Sources */,
+				00FE7E392C3D66A900A058FD /* Scene.swift in Sources */,
 				00826A462C3C42030042AD76 /* Preferences.swift in Sources */,
 				00826A4F2C3C6B470042AD76 /* RenderPipelineLibrary.swift in Sources */,
 				00FE7E362C3D5DF000A058FD /* Math.swift in Sources */,
@@ -383,6 +402,7 @@
 				00826A492C3C4F220042AD76 /* ShaderLibrary.swift in Sources */,
 				00FE7E2C2C3CA40E00A058FD /* MeshLibrary.swift in Sources */,
 				00826A0C2C3AB6C10042AD76 /* Game_Engine.xcdatamodeld in Sources */,
+				00FE7E3B2C3D67D000A058FD /* Sandbox.swift in Sources */,
 				00826A442C3C414F0042AD76 /* Engine.swift in Sources */,
 				00FE7E2E2C3CA9FC00A058FD /* Node.swift in Sources */,
 			);
