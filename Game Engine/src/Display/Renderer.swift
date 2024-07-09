@@ -8,7 +8,12 @@
 import MetalKit
 
 class Renderer: NSObject {
-    var gameObjects: [Node] = [GameObject(meshType: .Quad)]
+    var player = Player()
+    var gameObjects: [Node] = []
+    override init() {
+        super.init()
+        gameObjects.append(player)
+    }
 }
 
 extension Renderer: MTKViewDelegate {
@@ -22,7 +27,7 @@ extension Renderer: MTKViewDelegate {
         
         let commandBuffer = Engine.commandQueue.makeCommandBuffer();
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        
+        player.update(deltaTime: 1 / Float(view.preferredFramesPerSecond))
         for i in gameObjects {
             i.render(renderCommandEncoder: renderCommandEncoder!)
         }

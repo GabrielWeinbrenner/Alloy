@@ -11,6 +11,10 @@ struct RasterizerData {
     float4 color ;
 };
 
+struct ModelConstants {
+    float4x4 modelMatrix;
+};
+
 // Hash function to generate pseudo-random values
 float hash(float3 p) {
     p = fract(p * 0.8);
@@ -18,9 +22,11 @@ float hash(float3 p) {
     return fract((p.x + p.y) * p.z);
 }
 
-vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]]) {
+vertex RasterizerData basic_vertex_shader(const VertexIn vIn [[ stage_in ]],
+                                          constant ModelConstants &modelConstants [[ buffer(1) ]]) {
     RasterizerData rd;
     rd.position = float4(vIn.position, 1.0);
+    rd.position = modelConstants.modelMatrix * float4(vIn.position, 1.0);
     rd.color = vIn.color;
     
     return rd;
