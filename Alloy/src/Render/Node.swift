@@ -13,11 +13,11 @@ class Node {
     var children: [Node] = []
     var modelMatrix: matrix_float4x4 {
         var modelMatrix = matrix_identity_float4x4
-        modelMatrix.scale(by: scalar)
         modelMatrix.translate(by: position)
         modelMatrix.rotate(by: rotation.x, axis: SIMD3<Float>(1,0,0))
         modelMatrix.rotate(by: rotation.y, axis: SIMD3<Float>(0,1,0))
         modelMatrix.rotate(by: rotation.z, axis: SIMD3<Float>(0,0,1))
+        modelMatrix.scale(by: scalar)
         return modelMatrix
     }
     

@@ -9,20 +9,63 @@ import MetalKit
 
 class Sandbox: Scene {
     var player = Player()
-    var gameObject = Triangle()
+    var triangles: [Triangle] = []
+
     override func buildScene() {
-        self.addChild(player)
-//        self.addChild(gameObject)
+        let rows = 5
+        let columns = 5
+        let spacing: Float = 0.1
+
+        for row in -rows..<rows {
+            for column in -columns..<columns {
+                let triangle = Triangle()
+                triangle.position = SIMD3<Float>(
+                    Float(column) * spacing,
+                    Float(row) * spacing,
+                    0
+                )
+                addChild(triangle)
+                triangles.append(triangle)
+            }
+        }
+
+        // Example to add player and other game objects
+        player.scalar = SIMD3<Float>(repeating: 0.1)
+        addChild(player)
+    }
+
+    override func update(deltaTime: Float) {
+        let speed: Float = Keyboard.IsKeyPressed(.q) ? 0.1 : 0.01
+        if Keyboard.IsKeyPressed(.leftArrow) {
+            player.position.x -= speed
+        }
+        if Keyboard.IsKeyPressed(.rightArrow) {
+            player.position.x += speed
+        }
+        if Keyboard.IsKeyPressed(.upArrow) {
+            player.position.y += speed
+        }
+        if Keyboard.IsKeyPressed(.downArrow) {
+            player.position.y -= speed
+        }
+        if Keyboard.IsKeyPressed(.a) {
+            print(player.position)
+        }
+        for triangle in triangles {
+            triangle.rotation.z = atan2f(player.position.x - triangle.position.x, player.position.y - triangle.position.y)
+        }
+        super.update(deltaTime: deltaTime)
     }
 }
 
 class Triangle: GameObject {
     init() {
         super.init(meshType: .Triangle)
+        self.scalar = SIMD3<Float>(0.1,0.3,0.1)
     }
     override func update(deltaTime: Float) {
-        self.scalar = SIMD3<Float>(repeating: abs(cos(time)))
-        
+        // Example of animating the triangle
+        // self.scalar = SIMD3<Float>(repeating: abs(cos(time)))
         super.update(deltaTime: deltaTime)
     }
 }

@@ -25,6 +25,7 @@
 		00826A522C3C6E650042AD76 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A512C3C6E5B0042AD76 /* GameObject.swift */; };
 		00826A542C3C700B0042AD76 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00826A532C3C70070042AD76 /* Renderer.swift */; };
 		00BB42DA2C3D86A2009F6DAF /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BB42D92C3D86A0009F6DAF /* Keyboard.swift */; };
+		00BB42DC2C3EF2DC009F6DAF /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BB42DB2C3EF2DB009F6DAF /* Mouse.swift */; };
 		00FE7E2C2C3CA40E00A058FD /* MeshLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E2B2C3CA40B00A058FD /* MeshLibrary.swift */; };
 		00FE7E2E2C3CA9FC00A058FD /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E2D2C3CA9FB00A058FD /* Node.swift */; };
 		00FE7E312C3CAAC500A058FD /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE7E302C3CAAC300A058FD /* Renderable.swift */; };
@@ -75,6 +76,7 @@
 		00826A512C3C6E5B0042AD76 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		00826A532C3C70070042AD76 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		00BB42D92C3D86A0009F6DAF /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		00BB42DB2C3EF2DB009F6DAF /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		00FE7E2B2C3CA40B00A058FD /* MeshLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshLibrary.swift; sourceTree = "<group>"; };
 		00FE7E2D2C3CA9FB00A058FD /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		00FE7E302C3CAAC300A058FD /* Renderable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		00BB42D82C3D869A009F6DAF /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				00BB42DB2C3EF2DB009F6DAF /* Mouse.swift */,
 				00BB42D92C3D86A0009F6DAF /* Keyboard.swift */,
 			);
 			path = Input;
@@ -403,6 +406,7 @@
 				00FE7E312C3CAAC500A058FD /* Renderable.swift in Sources */,
 				00FE7E332C3CD0E300A058FD /* Player.swift in Sources */,
 				00826A4D2C3C699B0042AD76 /* RenderLibrary.swift in Sources */,
+				00BB42DC2C3EF2DC009F6DAF /* Mouse.swift in Sources */,
 				00826A542C3C700B0042AD76 /* Renderer.swift in Sources */,
 				00826A072C3AB6C10042AD76 /* AppDelegate.swift in Sources */,
 				00FE7E392C3D66A900A058FD /* Scene.swift in Sources */,

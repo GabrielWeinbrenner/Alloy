@@ -7,11 +7,17 @@
 
 import MetalKit
 
-class Renderer: NSObject { }
+class Renderer: NSObject { 
+    
+    init(_ mtkView: MTKView) {
+        super.init()
+        Preferences.ScreenSize = SIMD2<Float>(Float(mtkView.bounds.width), Float(mtkView.bounds.height))
+    }
+}
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        // When the window is resized
+        Preferences.ScreenSize = SIMD2<Float>(Float(view.bounds.width), Float(view.bounds.height))
     }
     
     func draw(in view: MTKView) {

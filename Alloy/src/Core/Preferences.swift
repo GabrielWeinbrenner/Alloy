@@ -21,4 +21,6 @@ class Preferences {
     
     public static var mainSampleCount: Int = 1
     
+    public static var ScreenSize: SIMD2<Float> = SIMD2<Float>(1280, 720)
+    
 }
