@@ -7,8 +7,9 @@
 import MetalKit
 
 struct ModelConstants {
-    var modelMatrix: matrix_float4x4!
+    var modelMatrix: matrix_float4x4?
 }
+
 enum GameObjectErrors: Error {
     case descriptorNotFound
 }
@@ -21,18 +22,18 @@ class GameObject: Node {
     }
     
     var time: Float = 0
-    override func update(deltaTime: Float) {
+    override func update(_ deltaTime: Float) {
         time += deltaTime
-        updateModelConstants(deltaTime: deltaTime)
+        updateModelConstants(deltaTime)
     }
-    func updateModelConstants(deltaTime: Float) {
+    func updateModelConstants(_ deltaTime: Float) {
         modelConstants.modelMatrix = self.modelMatrix
     }
 }
 
 extension GameObject: Renderable {
     func commitRender(_ renderCommandEncoder: MTLRenderCommandEncoder) throws {
-        guard let renderPipelineState = Engine.shared.renderPipelineLibrary.getRenderPipelineDescriptor(.Basic) else {
+        guard let renderPipelineState = Engine.shared.renderPipelineLibrary.getRenderPipelineState(.Basic) else {
             throw (GameObjectErrors.descriptorNotFound)
         }
 //        renderCommandEncoder.setTriangleFillMode(.lines)

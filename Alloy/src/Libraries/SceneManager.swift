@@ -25,7 +25,8 @@ class SceneManager {
         guard let currentScene = currentScene else {
             return
         }
-        currentScene.update(deltaTime: deltaTime)
+        currentScene.updateCamera(deltaTime)
+        currentScene.update(deltaTime)
         try currentScene.render(renderCommandEncoder: renderCommandEncoder)
     }
     

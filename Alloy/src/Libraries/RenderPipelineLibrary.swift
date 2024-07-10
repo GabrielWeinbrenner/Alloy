@@ -25,7 +25,7 @@ class RenderPipelineLibrary {
         renderPipelineState = renderPipelineStates[.Basic]!.renderPipelineState
     }
     
-    public func getRenderPipelineDescriptor(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState? {
+    public func getRenderPipelineState(_ type: RenderPipelineStateTypes) -> MTLRenderPipelineState? {
         renderPipelineState = renderPipelineStates[type]!.renderPipelineState
         return renderPipelineState
     }
@@ -38,7 +38,7 @@ protocol RenderPipelineState {
 }
 
 public struct Basic_RenderPipeline: RenderPipelineState {
-    var name: String = "Basic Vertex Descriptor"
+    var name: String = "Basic Pipeline State Descriptor"
     
     var renderPipelineState: MTLRenderPipelineState
     

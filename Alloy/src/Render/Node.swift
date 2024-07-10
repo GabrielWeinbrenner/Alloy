@@ -34,9 +34,9 @@ class Node {
         }
     }
     
-    func update(deltaTime: Float) {
+    func update(_ deltaTime: Float) {
         for child in children {
-            child.update(deltaTime: deltaTime)
+            child.update(deltaTime)
         }
     }
 }
